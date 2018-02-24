@@ -59,7 +59,7 @@ build_script:
       git add *.miz 2>&1
       git commit -m "MOOSE demonstration missions (dynamically loading), commit ID $env:APPVEYOR_REPO_COMMIT [skip ci]" 2>&1 
       git push origin master 2>&1
-      #dir
+      dir
 
 
 artifacts:
