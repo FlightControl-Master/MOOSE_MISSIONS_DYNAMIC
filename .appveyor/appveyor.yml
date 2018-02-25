@@ -45,11 +45,18 @@ build_script:
       foreach( $dir_packed in Get-ChildItem "c:\Projects\Moose_Missions_Unpacked" -Filter _unpacked -Recurse -Directory | % { $_.FullName } ) 
       { 
         Write-Host "dir_packed : $dir_packed"
-        $dir = $dir_packed.ToString().TrimEnd( "\_unpacked" )
-        $miz = $dir_packed.ToString().TrimEnd( "\_unpacked" ) + ".miz"
+        $dir = $dir_packed.ToString().Replace( "\_unpacked","" )
+        $miz = $dir_packed.ToString().Replace( "\_unpacked","" )
+        $miz = $miz + "\" + ( Split-Path -Path "$miz" -Leaf )
+        $miz = $miz + ".miz"
         Write-Host "miz : $miz"  
-        7z a -r -y -tzip "$miz" "$dir_packed/*" 
-        Copy-Item "$miz" -Destination .
+        $to_dir = $dir.Replace("C:\Projects\Moose_Missions_Unpacked\","")
+        Write-Host "to_dir : $to_dir"  
+        7z a -r -y -tzip "$miz" "$dir_packed/*"
+        Remove-Item -Path "$dir_packed" -Force -Recurse
+        Remove-Item -Path "$dir\*.bat" -Force -Recurse 
+        mkdir -Path "$to_dir" -Force
+        Copy-Item "$dir\*" -Destination "$to_dir" -Recurse -Force
       } 
       echo "Commit to GITHUB" 
       git config --global credential.helper store  
