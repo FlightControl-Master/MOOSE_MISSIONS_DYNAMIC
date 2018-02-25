@@ -64,7 +64,7 @@ build_script:
       Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token_documentation):x-oauth-basic@github.com`n" 
       git config --global user.email "sven.van.de.velde@telenet.be" 
       git config --global user.name "FlightControl-User" 
-      git add *.miz 2>&1
+      git add . 2>&1
       git commit -m "MOOSE demonstration missions (dynamically loading), commit ID $env:APPVEYOR_REPO_COMMIT [skip ci]" 2>&1 
       git push origin master 2>&1
       dir
