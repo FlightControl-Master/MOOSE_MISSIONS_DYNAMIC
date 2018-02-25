@@ -55,6 +55,7 @@ build_script:
         7z a -r -y -tzip "$miz" "$dir_packed/*"
         Remove-Item -Path "$dir_packed" -Force -Recurse
         Remove-Item -Path "$dir\*.bat" -Force -Recurse 
+        dir "$dir" 
         mkdir -Path "$to_dir" -Force
         Copy-Item "$dir\*" -Destination "$to_dir" -Recurse -Force
       } 
