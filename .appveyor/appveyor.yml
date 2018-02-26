@@ -65,7 +65,7 @@ build_script:
       git config --global user.email "sven.van.de.velde@telenet.be" 
       git config --global user.name "FlightControl-User" 
       git add . 2>&1
-      git commit -m "MOOSE demonstration missions (dynamically loading), commit ID $env:APPVEYOR_REPO_COMMIT [skip ci]" 2>&1 
+      git commit -m "MOOSE dynamically loading demonstration missions [skip ci]" 2>&1 
       git push origin master 2>&1
       dir
 
