@@ -33,8 +33,8 @@ cache:
 build_script:
   - ps: |
       git checkout "$env:appveyor_repo_branch" 2>&1
-      git clone -q --depth=1 https://github.com/FlightControl-Master/MOOSE_INCLUDE.git c:\Projects\Moose_Include 
-      git clone -q --depth=1 https://github.com/FlightControl-Master/MOOSE_MISSIONS_UNPACKED.git c:\Projects\Moose_Missions_Unpacked 
+      git clone -q --depth=1 -b "$env:appveyor_repo_branch" https://github.com/FlightControl-Master/MOOSE_INCLUDE.git c:\Projects\Moose_Include 
+      git clone -q --depth=1 -b "$env:appveyor_repo_branch" https://github.com/FlightControl-Master/MOOSE_MISSIONS_UNPACKED.git c:\Projects\Moose_Missions_Unpacked 
       dir c:\Projects 
       dir 
       foreach( $file in Get-ChildItem "c:\Projects\Moose_Missions_Unpacked" -Filter Moose.lua -Recurse | % { $_.FullName } )  
@@ -52,7 +52,7 @@ build_script:
         Write-Host "miz : $miz"  
         $to_dir = $dir.Replace("C:\Projects\Moose_Missions_Unpacked\","")
         Write-Host "to_dir : $to_dir"  
-        7z a -r -y -tzip "$miz" "$dir_packed/*"
+        7z a -r -y -tzip "$miz" "$dir_packed/*" >$null 2>&1
         Remove-Item -Path "$dir_packed" -Force -Recurse
         Remove-Item -Path "$dir\*.bat" -Force -Recurse 
         dir "$dir" 
