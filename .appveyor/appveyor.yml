@@ -1,0 +1,78 @@
+version: 0.0.1.{build}
+shallow_clone: false
+skip_branch_with_pr: false
+skip_commits:
+  message: /!nobuild/
+skip_tags: false
+
+environment:
+  access_token_documentation:
+    secure: JVBVVL8uJUcLXN+48eRdELEeCGOGCCaMzCqutsUqNuaZ/KblG5ZTt7+LV4UKv/0f
+
+platform:
+  - x64
+
+init:
+  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER -and $env:APPVEYOR_BUILD_NUMBER -ne ((Invoke-RestMethod `
+        https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/history?recordsNumber=50).builds | `
+        Where-Object pullRequestId -eq $env:APPVEYOR_PULL_REQUEST_NUMBER)[0].buildNumber) { `
+        throw "There are newer queued builds for this pull request, failing early." }
+#  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+install:
+# Outcomment if lua environment invalidates and needs to be reinstalled, otherwise all will run from the cache.
+  - call choco install 7zip.commandline
+
+
+cache:
+  - C:\ProgramData\chocolatey\lib
+  - C:\ProgramData\chocolatey\bin
+  
+
+
+build_script:
+  - ps: |
+      git checkout "$env:appveyor_repo_branch" 2>&1
+      git clone -q --depth=1 -b "$env:appveyor_repo_branch" https://github.com/FlightControl-Master/MOOSE_INCLUDE.git c:\Projects\Moose_Include 
+      git clone -q --depth=1 -b "$env:appveyor_repo_branch" https://github.com/FlightControl-Master/MOOSE_MISSIONS_UNPACKED.git c:\Projects\Moose_Missions_Unpacked 
+      dir c:\Projects 
+      dir 
+      foreach( $file in Get-ChildItem "c:\Projects\Moose_Missions_Unpacked" -Filter Moose.lua -Recurse | % { $_.FullName } )  
+      { 
+        Write-Host "file : $file" 
+        Copy-Item -Path c:\Projects\Moose_Include\Moose_Include_Dynamic\Moose.lua -Destination $file
+      } 
+      foreach( $dir_packed in Get-ChildItem "c:\Projects\Moose_Missions_Unpacked" -Filter _unpacked -Recurse -Directory | % { $_.FullName } ) 
+      { 
+        Write-Host "dir_packed : $dir_packed"
+        $dir = $dir_packed.ToString().Replace( "\_unpacked","" )
+        $miz = $dir_packed.ToString().Replace( "\_unpacked","" )
+        $miz = $miz + "\" + ( Split-Path -Path "$miz" -Leaf )
+        $miz = $miz + ".miz"
+        Write-Host "miz : $miz"  
+        $to_dir = $dir.Replace("C:\Projects\Moose_Missions_Unpacked\","")
+        Write-Host "to_dir : $to_dir"  
+        7z a -r -y -tzip "$miz" "$dir_packed/*" >$null 2>&1
+        Remove-Item -Path "$dir_packed" -Force -Recurse
+        Remove-Item -Path "$dir\*.bat" -Force -Recurse 
+        dir "$dir" 
+        mkdir -Path "$to_dir" -Force
+        Copy-Item "$dir\*" -Destination "$to_dir" -Recurse -Force
+      } 
+      echo "Commit to GITHUB" 
+      git config --global credential.helper store  
+      Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token_documentation):x-oauth-basic@github.com`n" 
+      git config --global user.email "sven.van.de.velde@telenet.be" 
+      git config --global user.name "FlightControl-User" 
+      git add . 2>&1
+      git commit -m "MOOSE dynamically loading demonstration missions [skip ci]" 2>&1 
+      git push origin "$env:appveyor_repo_branch" 2>&1
+      dir
+
+
+artifacts:
+
+on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+ 
+ 
