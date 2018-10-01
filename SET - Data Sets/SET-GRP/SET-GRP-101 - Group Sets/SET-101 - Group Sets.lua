@@ -1,7 +1,3 @@
-
-
-
-
 SetVehicles = SET_GROUP:New()
 
 SetVehicles:AddGroupsByName( { "Vehicle A", "Vehicle B", "Vehicle C" } )
