@@ -25,7 +25,7 @@ A2GDispatcher:SetTacticalDisplay( true )
 
 -- Setup the squadrons.
 
-A2GDispatcher:SetSquadron( "Maykop SEAD", "SEAD", { "CCCP KA-50" }, 10 )
+A2GDispatcher:SetSquadron( "Maykop SEAD", "SEAD", { "CCCP KA-50 SEAD" }, 10 )
 A2GDispatcher:SetSquadronSead( "Maykop SEAD", 120, 250 )
 A2GDispatcher:SetSquadronTakeoffFromParkingHot( "Maykop SEAD" )
 A2GDispatcher:SetSquadronOverhead( "Maykop SEAD", 0.25 )
