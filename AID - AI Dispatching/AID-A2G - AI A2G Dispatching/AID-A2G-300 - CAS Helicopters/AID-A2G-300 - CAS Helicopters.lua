@@ -6,7 +6,7 @@
 -- Define a SET_GROUP object that builds a collection of groups that define the recce network.
 -- Here we build the network with all the groups that have a name starting with CCCP Recce.
 DetectionSetGroup = SET_GROUP:New()
-DetectionSetGroup:FilterPrefixes( { "CCCP Recce" } )
+DetectionSetGroup:FilterPrefixes( { "Recce" } )
 DetectionSetGroup:FilterStart()
 
 Detection = DETECTION_AREAS:New( DetectionSetGroup, 1000 )
@@ -25,7 +25,7 @@ A2GDispatcher:SetTacticalDisplay( true )
 
 -- Setup the squadrons.
 
-A2GDispatcher:SetSquadron( "Maykop CAS", "CAS", { "CCCP KA-50" }, 10 )
-A2GDispatcher:SetSquadronCas( "Maykop CAS", 120, 250 )
-A2GDispatcher:SetSquadronTakeoffFromParkingHot( "Maykop CAS" )
-A2GDispatcher:SetSquadronOverhead( "Maykop CAS", 0.25 )
+A2GDispatcher:SetSquadron( "Sq34", "FARP CAS", { "Defender" }, 10 )
+A2GDispatcher:SetSquadronCas( "Sq34", 120, 250 )
+A2GDispatcher:SetSquadronTakeoffFromParkingHot( "Sq34" )
+A2GDispatcher:SetSquadronOverhead( "Sq34", 0.25 )
