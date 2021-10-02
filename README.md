@@ -1,78 +1,114 @@
-# MOOSE framework
+# MOOSE Framework
 
-MOOSE is a **M**ission **O**bject **O**riented **S**cripting **E**nvironment, and is meant for mission designers in DCS World.
+MOOSE is a **M**ission **O**bject **O**riented **S**cripting **E**nvironment, and is meant for mission designers and mission hosters.
 It allows to quickly setup complex missions using pre-scripted scenarios using the available classes within the MOOSE Framework.
-  
-  
-##  MOOSE Framework Goal
+MOOSE works with the current version of DCS world and earlier versions.
 
-The goal of MOOSE is to allow mission designers to enhance their scripting with mission orchestration objects, which can be instantiated from defined classes within the framework. This will allow to write mission scripts with minimal code embedded. Of course, the richness of the framework will determine the richness of the misson scenarios. 
-The MOOSE is a service that is produced while being consumed ... , it will evolve further as more classes are developed for the framework, and as more users are using it.
-MOOSE is not a one-man show, it is a collaborative effort and meant to evolve within a growing community around the framework.
-Within the community, key users will start supporting, documenting, explaining and even creating new classes for the framework.
-It is the ambition to grow this framework as a de-facto standard for mission designers to use.
-  
-  
-##  MOOSE Repositories
+![MOOSE Banner](Images\MOOSE.JPG)
 
-The underlying picture documents the different repositories in the MOOSE framework. The white ones are edited and are the source of the framework.
-The red ones contain generated artefacts. See further the explanation for each repository.
 
-![Graphic](https://raw.githubusercontent.com/FlightControl-Master/MOOSE_DOCS/master/Configuration/Master.png)
- 
-  
-###   [MOOSE](https://github.com/FlightControl-Master/MOOSE) - For edit and development
+## 1. **[MOOSE Starters Guide](Moose_Starters_Guide.html)**
 
-This repository contains the source lua code of the MOOSE framework.
-  
-  
-###   [MOOSE_INCLUDE](https://github.com/FlightControl-Master/MOOSE_INCLUDE) - For use and generated 
+You need to write lua code (scripts) to apply the MOOSE framework. 
+But it is not really that hard, if you understand a couple of principles.
 
-This repository contains the Moose.lua file to be included within your missions.
-  
- 
-###   [MOOSE_DOCS](https://github.com/FlightControl-Master/MOOSE_DOCS) - Not for use
 
-This repository contains the generated documentation and pictures and other references. The generated documentation is reflected in html and is published at: https://flightcontrol-master.github.io/MOOSE_DOCS/
-  
-  
-###   [MOOSE_MISSIONS](https://github.com/FlightControl-Master/MOOSE_MISSIONS) - For use and generated
+## 2. **[MOOSE Mission Designers Guide](Moose_Designers_Guide.html)**
 
-This repository contains all the demonstration missions in packed format (*.miz), and can be used without any further setup in DCS WORLD.
-  
-  
-###   [MOOSE_MISSIONS_DYNAMIC](https://github.com/FlightControl-Master/MOOSE_MISSIONS_DYNAMIC) - For use and generated
+This section is meant for those who really want to start using MOOSE and write lua scripts for their missions.
+The section provides a comprehensive overview of the different classes that form the complete MOOSE framework.
+Here you find a high-level explanation and features, how to:
 
-This repository contains all the demonstration missions in packed format (*.miz), but MOOSE is dynamically loaded from your disk! These missions are to be used by beta testers of the MOOSE framework and are not for end uers!!!!
- 
-    
-###   [MOOSE_MISSIONS_UNPACKED](https://github.com/FlightControl-Master/MOOSE_MISSIONS_UNPACKED) - For edit and development
-
-This repository contains all the demonstration missions in unpacked format. That means that there is no .miz file included, but all the .miz contents are unpacked.
-
-  
-  
-  
-##  [MOOSE Web Site](https://flightcontrol-master.github.io/MOOSE_DOCS/)
-
-Documentation on the MOOSE class hierarchy, usage guides and background information can be found here for normal users, beta testers and contributors.
-
-![Click on this link to browse to the MOOSE main web page.](https://raw.githubusercontent.com/FlightControl-Master/MOOSE_DOCS/master/Configuration/Site.png)
-  
-  
-  
-##  [MOOSE Youtube Channel](https://www.youtube.com/channel/UCjrA9j5LQoWsG4SpS8i79Qg)
-
-MOOSE has a [broadcast and training channel on YouTube](https://www.youtube.com/channel/UCjrA9j5LQoWsG4SpS8i79Qg) with various channels that you can watch.
-  
-  
-    
-##  [MOOSE on Discord](https://discord.gg/yBPfxC6)
-
-MOOSE has a living (chat and video) community of users, beta testers and contributors. The gathering point is a service provided by discord.com. If you want to join this community, just click Discord and you'll be on board in no time.
-  
-  
-Kind regards,
-FlightControl (FC)
-  
+   * Setup AI dispatchers to create complex and coordinated AI behaviour.
+   * Cargo handling
+   * Setup task dispatchers for Mission completion
+   * How to use MOOSE wrapper classes
+   * The different components of the core MOOSE engine
    
+Each class will link you further down into the MOOSE Classes guide, for more detailed information on each MOOSE class. 
+
+
+## 3. **[MOOSE Classes Guide](Documentation/index.html)**
+
+Here you can find detailed documentation for each MOOSE class.
+Click on the hamburger menu on the left upper corner of each page to navigate to other MOOSE classes.
+
+
+## 4. MOOSE Setup
+
+The delivery of MOOSE follows a structured release process. Over time, new features are added that can be used in your mission.
+
+### The latest release of MOOSE can be downloaded **[here](https://github.com/FlightControl-Master/MOOSE/releases)**.  
+
+There are 3 different ways how you can use MOOSE, each with a different engagement and complexity level:
+
+
+### 4.1. Setup for **[Mission Designers](Moose_Setup_Guide.html)**
+
+This section shows how to setup a development environment for Mission Designers using the MOOSE framework.
+
+  - Download and install Java.
+  - Setup Lua Development Tools IDE (from the Eclipse suite).
+  - Setup a logging tool.
+  - Tweak your DCS environment.
+
+
+### 4.2. Setup for **[Alpha or Beta Testing Guide](Beta_Test_Guide.html)**.
+
+Beta testers of MOOSE are requested to install additional software. 
+
+As a return or as a reward, testers get:
+ 
+  * Newly developed features planned for the next MOOSE release can be tested and incorporated in your missions early.
+  * You can evaluate and contribute to the stability of the next release.
+  * Your mission creation workflow becomes very flexible. New features are dynamically added to you missions.
+
+Please read the detailed **[Beta Test Guide](Beta_Test_Guide.html)** for more information.
+  
+  
+### 4.3. Contribute on the MOOSE development
+
+Those people who have experience in lua development or are excited to contribute to the MOOSE project are welcome.
+
+Please consult the **[Contribution Guide](Contribution_Guide.html)** for more information.
+  
+
+### 4.4. Debug your code interactively using LDT
+
+Have a look at the **[Interactive Debug Guide](Interactive_Debug_Guide.html)** to setup your system so you can debug your mission code.
+
+
+## 5. MOOSE Support Channels
+
+MOOSE is broadcasted, documented and supported through various social media channels.  
+
+Click here for the **[communities guide](Communities.html)** of the MOOSE framework.
+
+
+## 6. MOOSE framework goal
+
+The goal of MOOSE is to allow mission designers to **enhance the mission designs** by using **mission orchestration objects**, 
+which can be _instantiated_ from defined classes within the framework. 
+This will allow to write exciting missions and multi player cooperative operation scenarios. 
+
+Of course, the richness of the framework will determine the richness of the misson scenarios. 
+The MOOSE is a service that is produced while being consumed ... , 
+it will evolve further as more classes are developed for the framework, and as more users are using it.  
+
+MOOSE is NOT meant to be a one-man show, it is meant to evolve within a growing community around the framework.  
+
+Within the community, key users will support, document, explain and even create new classes for the framework.
+It is the ambition to grow this framework as a de-facto standard for mission designers to use within the DCS World community.
+
+
+
+## 7. [MOOSE community on Discord](https://discord.gg/yBPfxC6) 
+
+Join our MOOSE community on Discord. 
+A place where mission designers and developers come together to discuss the latest features.
+There are a lot of people supporting Mission Designers on Discord.
+
+
+Thank you!
+The Moose Team
+ 
